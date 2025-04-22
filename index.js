@@ -14,5 +14,17 @@ console.log('\nInformações de Memória:');
 console.log(`Memória Total: ${(os.totalmem() / 1e9).toFixed(2)} GB`);
 console.log(`Memória Livre: ${(os.freemem() / 1e9).toFixed(2)} GB`);
 
-console.log('\nInformações de Rede:');
-console.log(os.networkInterfaces());
+function exibirPlacasDeRede() {
+    const interfaces = os.networkInterfaces();
+    console.log('\nPlacas de Rede:');
+    for (const interfaceName in interfaces) {
+        const addresses = interfaces[interfaceName];
+        addresses.forEach(address => {
+            if (address.family === 'IPv4') {
+                console.log(`- ${interfaceName}: ${address.address}`);
+            }
+        });
+    }
+}
+
+exibirPlacasDeRede();
